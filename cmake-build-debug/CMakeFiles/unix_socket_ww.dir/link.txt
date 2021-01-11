@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/cc -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -L/usr/local/opt/ruby/lib CMakeFiles/unix_socket_ww.dir/main.c.o  -o unix_socket_ww 

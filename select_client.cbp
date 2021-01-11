@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="select_client"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/bytedance/c/unix_socket_ww"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/bytedance/c/unix_socket_ww"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/bytedance/c/unix_socket_ww"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="select_server">
+				<Option output="/Users/bytedance/c/unix_socket_ww/select_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/bytedance/c/unix_socket_ww"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 select_server"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="select_server/fast">
+				<Option output="/Users/bytedance/c/unix_socket_ww/select_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/bytedance/c/unix_socket_ww"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 select_server/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/bytedance/c/unix_socket_ww/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/0.hello_socket/client.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/0.hello_socket/client.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/0.hello_socket/server.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/0.hello_socket/server.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/1.time_server/client.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/1.time_server/client.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/2.echo/v1/client.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/2.echo/v1/client.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/2.echo/v2/server.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/2.echo/v2/server.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/3.multiple_io/poll/poll_cli.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/3.multiple_io/poll/poll_cli.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/3.multiple_io/poll/poll_server.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/3.multiple_io/poll/poll_server.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/3.multiple_io/select/select_cli.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/3.multiple_io/select/select_cli.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/3.multiple_io/select/select_ser.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/3.multiple_io/select/select_ser.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/common/common.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/common/common.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/helper/helper.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/helper/helper.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/main.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/types/types.c">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/types/types.h">
+			<Option target="select_server"/>
+		</Unit>
+		<Unit filename="/Users/bytedance/c/unix_socket_ww/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

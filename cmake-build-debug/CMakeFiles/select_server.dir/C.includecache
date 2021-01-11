@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/bytedance/c/unix_socket_ww/3.multiple_io/select/select_cli.c
+sys/select.h
+-
+select_cli.h
+/Users/bytedance/c/unix_socket_ww/3.multiple_io/select/select_cli.h
+../../types/types.h
+/Users/bytedance/c/unix_socket_ww/types/types.h
+../../helper/helper.h
+/Users/bytedance/c/unix_socket_ww/helper/helper.h
+string.h
+-
+stdio.h
+-
+
+/Users/bytedance/c/unix_socket_ww/3.multiple_io/select/select_cli.h
+
+/Users/bytedance/c/unix_socket_ww/helper/helper.h
+errno.h
+-
+stdio.h
+-
+stdlib.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+../types/types.h
+/Users/bytedance/c/unix_socket_ww/types/types.h
+
+/Users/bytedance/c/unix_socket_ww/types/types.h
+

@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/bytedance/c/unix_socket_ww/3.multiple_io/poll/poll_server.c
+poll_server.h
+/Users/bytedance/c/unix_socket_ww/3.multiple_io/poll/poll_server.h
+limits.h
+-
+poll.h
+-
+zconf.h
+-
+string.h
+-
+arpa/inet.h
+-
+../../types/types.h
+/Users/bytedance/c/unix_socket_ww/types/types.h
+
+/Users/bytedance/c/unix_socket_ww/3.multiple_io/poll/poll_server.h
+../../helper/helper.h
+/Users/bytedance/c/unix_socket_ww/helper/helper.h
+
+/Users/bytedance/c/unix_socket_ww/helper/helper.h
+errno.h
+-
+stdio.h
+-
+stdlib.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+../types/types.h
+/Users/bytedance/c/unix_socket_ww/types/types.h
+
+/Users/bytedance/c/unix_socket_ww/types/types.h
+
