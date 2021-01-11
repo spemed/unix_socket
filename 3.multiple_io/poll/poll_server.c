@@ -86,9 +86,11 @@ _Noreturn void poll_server(unsigned int port) {
             }
         }
 
-        handle: for (int j = maxi; j < OPEN_MAX; ++j) {
+        //todo 等待套接字读写仍然有bug
+        handle: for (int j = 1; j < maxi + 1; ++j) {
             if (client_arr[j].fd == -1)  continue;
             if (client_arr[j].revents & (POLLRDNORM|POLLERR)) {
+                bzero(buffer,BUFFSIZE);
                 int read_bytes = read_once(client_arr[j].fd,buffer,BUFFSIZE);
                 if(read_bytes < 0) {
                     //接收到了来自客户端的tcp分节
@@ -105,7 +107,7 @@ _Noreturn void poll_server(unsigned int port) {
                     client_arr[j].fd = -1;
                     printf("connection close from client\n");
                 } else {
-                    writen(client_arr[j].fd,buffer,read_bytes);
+                    writen(client_arr[j].fd,buffer,strlen(buffer));
                 }
             }
             if (--nready <= 0) break;
