@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(select_client C)
 set(CMAKE_C_STANDARD 99)
 add_executable(
-        select_server
+        poll_server
         main.c
         #        2.echo/v1/server.c
         #        2.echo/v1/server.h

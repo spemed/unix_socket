@@ -9,8 +9,7 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include "../../types/types.h"
-#define INFTIM -1
-#define BUFFSIZE 65535
+
 
 typedef struct pollfd pollfd;
 
@@ -88,9 +87,8 @@ _Noreturn void poll_server(unsigned int port) {
 
         //todo 等待套接字读写仍然有bug
         handle: for (int j = 1; j < maxi + 1; ++j) {
-            if (client_arr[j].fd == -1)  continue;
+            if (client_arr[j].fd == -1) continue;
             if (client_arr[j].revents & (POLLRDNORM|POLLERR)) {
-                bzero(buffer,BUFFSIZE);
                 int read_bytes = read_once(client_arr[j].fd,buffer,BUFFSIZE);
                 if(read_bytes < 0) {
                     //接收到了来自客户端的tcp分节
@@ -107,10 +105,12 @@ _Noreturn void poll_server(unsigned int port) {
                     client_arr[j].fd = -1;
                     printf("connection close from client\n");
                 } else {
-                    writen(client_arr[j].fd,buffer,strlen(buffer));
+                    writen(client_arr[j].fd,buffer,read_bytes);
                 }
+                //只有处理完一次完整的读事件[得到read_once的返回值并进行相应处理]
+                //才能减少nready
+                if (--nready <= 0) break;
             }
-            if (--nready <= 0) break;
         }
     }
 }

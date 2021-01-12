@@ -7,6 +7,9 @@
 typedef struct sockaddr SA;
 typedef void sigfunc(int) ;
 typedef int boolean;
+typedef struct pollfd pollfd;
 #define TRUE 1
 #define FALSE 0
+#define INFTIM -1
+#define BUFFSIZE 65535
 #endif //UNIX_SOCKET_TYPES_H

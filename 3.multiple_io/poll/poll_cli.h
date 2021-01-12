@@ -3,7 +3,7 @@
 //
 
 #ifndef SELECT_CLIENT_POLL_CLI_H
-void poll_cli();
+void poll_cli(const char *,unsigned int);
 #define SELECT_CLIENT_POLL_CLI_H
 
 #endif //SELECT_CLIENT_POLL_CLI_H
