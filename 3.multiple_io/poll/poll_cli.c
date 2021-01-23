@@ -12,27 +12,26 @@
 void handle(FILE* file,int socket_fd) {
     int file_fd = fileno(file);
     pollfd client_arr[2];
-    client_arr[0].fd = file_fd;
+    client_arr[0].fd = socket_fd;
     client_arr[0].events = POLLRDNORM;
-    client_arr[1].fd = socket_fd;
-    client_arr[1].events = POLLRDNORM;
+    client_arr[1].fd = file_fd;
+    client_arr[1].events = POLLWRITE;
+    int maxi = 2;
 
     char buffer[BUFFSIZE];
     bzero(buffer,sizeof(buffer));
 
     //死循环
     while (TRUE) {
-        poll(client_arr,3,INFTIM);
+        poll(client_arr,maxi + 1,INFTIM);
         //如果套接字返回
         if (client_arr[0].revents & (POLLRDNORM|POLLERR)) {
             //如果已经读到了文件终止符,则关闭写一侧
             int read_bytes = read_once(client_arr[0].fd,buffer,BUFFSIZE);
             //发生了错误
             if (read_bytes < 0) {
-                close(client_arr[0].fd);
                 ERR_PRINT("ERR WHEN CONNECTION");
             } else if (0 == read_bytes) {
-                close(client_arr[0].fd);
                 printf("exit normally\n");
                 exit(0);
             } else {

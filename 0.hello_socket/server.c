@@ -11,7 +11,7 @@
 #include <unistd.h>
 
 
-void start_server(int port) {
+void start_server(int port,int back_log) {
     /**
      * PF_INET|AF_INET 指定网际层为ipv4协议
      * SOCK_STREAM TCP流式套接字
@@ -36,7 +36,8 @@ void start_server(int port) {
         ERR_CHECK(get_errno())
     }
 
-    result = listen(socket_fd,200); //指定backlog=200(包含等待三次握手和已经完成了三次握手的连接数,超出200时服务端不响应客户端的任何握手请求(也不会回复RST),将会触发超时重传)
+    //No, that's not necessary -- as long as you're accepting connections as soon as they come in, the length of your listen backlog is irrelevant. You can have as many active connections as you need; the listen backlog only affects connections which haven't been fully established
+    result = listen(socket_fd,back_log); //指定backlog=200(等待三次握手的连接数(所有未处于established的连接),超出200时服务端不响应客户端的任何握手请求(也不会回复RST),将会触发超时重传)
     if (result < 0) {
         ERR_CHECK(get_errno())
     }
@@ -70,7 +71,7 @@ void start_server(int port) {
         }
         printf("success in send %d bytes,content is %s\n",result,buffer);
         bzero(buffer,sizeof(buffer));
-        close(connect_fd);
+        //close(connect_fd);
         printf("connection close\n");
     }
 }

@@ -30,4 +30,4 @@ add_executable(
         3.multiple_io/poll/poll_server.h
         3.multiple_io/poll/poll_cli.c
         3.multiple_io/poll/poll_cli.h
-)
+        4.get_socket_option/show_all_options.c 4.get_socket_option/show_all_options.h)
