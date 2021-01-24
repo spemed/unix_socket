@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(select_client C)
 set(CMAKE_C_STANDARD 99)
 add_executable(
-        poll_server
+        so_linger_server
         main.c
         #        2.echo/v1/server.c
         #        2.echo/v1/server.h
@@ -30,4 +30,7 @@ add_executable(
         3.multiple_io/poll/poll_server.h
         3.multiple_io/poll/poll_cli.c
         3.multiple_io/poll/poll_cli.h
-        4.get_socket_option/show_all_options.c 4.get_socket_option/show_all_options.h)
+        4.socket_option/show_all_options.c
+        4.socket_option/show_all_options.h
+        4.socket_option/so_linger.c
+        4.socket_option/so_linger.h)
