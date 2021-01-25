@@ -9,7 +9,7 @@
 void client_handle(int port);
 void server_handle(int port);
 //阻塞型io
-void block_socket_close_normal(int socket_fd); //正常关闭
+void close_normal(int socket_fd); //正常关闭
 void block_socket_close_so_linger_on(int socket_fd); //启动so_linger且秒数设置为0
 void block_socket_close_so_linger_on_and_set_seconds(int socket_fd,int seconds); //启动so_linger且设置秒数
 //非阻塞io

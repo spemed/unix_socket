@@ -5,7 +5,7 @@
 
 
 int main() {
-    server_handle(10000);
+    client_handle(10000);
     return 0;
 }
 

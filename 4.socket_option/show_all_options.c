@@ -34,7 +34,7 @@ static char *sock_str_linger(val* val,int len) {
     if (len != sizeof(struct linger )) {
         snprintf(strres, sizeof(strres), "size (%d) not sizeof(struct linger)", len);
     } else {
-        snprintf(strres, sizeof(strres),"value={status=%s,linger_time=%d}",val->linger_val.l_onoff == 1 ? "on" : "off",val->linger_val.l_linger);
+        snprintf(strres, sizeof(strres),"value={status=%s,linger_time=%d}",val->linger_val.l_onoff != 0 ? "on" : "off",val->linger_val.l_linger);
     }
     return strres;
 }
