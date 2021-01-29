@@ -73,13 +73,13 @@ socket_opts options[] = {
        l_onoff 非0值为enable,0值为disable
        l_linger 延时的时间
       there are two ways to close the established connections
-      正常方法：四次挥手,FIN|ACK|FIN|ACK,完成四次挥手后,主动申请关闭的一方[active close]会处于time_wait状态[防串包],并于2msl之后关闭[维持处于time_wait的连接需要占用操作系统的资源]
-      异常关闭：直接关闭连接并向对端发送RST分节,连接会直接重置,主动关闭的一侧不会有time_wait状态。
+      正常方法：四次挥手,FIN|ACK|FIN|ACK四分组,主动申请关闭的一方[active close]会处于time_wait状态[防串包],并于2msl之后关闭[维持处于time_wait的连接需要占用操作系统的资源]
+      异常关闭：直接向对端发送RST分节,连接会重置,主动关闭的一侧不会有time_wait状态。
 
-      正常close的情况下,close会把套接字的引用计数减一,然后返回。减到0时,内核会试图把发送缓冲区中尚未发送的数据发送出去[保证数据可以发到对端],而后向对端发送FIN包。[对端执行read调用将会返回0]
+      正常close的情况下,close会把套接字的引用计数减一,然后返回。减到0时,内核会试图把发送缓冲区中尚未发送的数据发送出去,而后向对端发送FIN包。[对端执行read调用将会返回0]
       [阻塞套接字]
-      当启动了l_onoff,且l_linger为0时,close直接返回,请求方将会抛弃发送缓冲区中未发送的数据,直接向对端发送RST分节,断开连接。[对端如果阻塞于select,poll等系统调用会返回err事件,如果阻塞于read系统调用将会返回-1。如果对一个已经收到RST分节的套接字进行write操作会触发SIGPIPE信号导致进程退出,进行read操作会返回ECONNECTIONRESET的错误]
-      当启动了l_onoff,且l_linger为大于0的值时,close将会阻塞l_linger秒或者发送缓冲区的数据为空时返回,如果在规定秒数内可以发送完发送缓冲区中的数据，则进入正常的四次挥手流程。否则抛弃缓冲区中的所有数据并发送RST分节,然后close返回
+      当启动了l_onoff,且l_linger为0时,close直接返回,请求方将会抛弃发送缓冲区中未发送的数据,然后直接向对端发送RST分节,断开连接。[对端如果阻塞于select,poll等系统调用会设置可写/读事件,如果阻塞于read系统调用将会返回-1。如果对一个已经收到RST分节的套接字进行write操作会触发SIGPIPE信号导致进程退出,进行read操作(已经阻塞于read也会返回)会返回ECONNRESET的错误]
+      当启动了l_onoff,且l_linger为大于0的值时,close将会阻塞l_linger秒,如果在规定秒数内可以发送完发送缓冲区中的数据，则进入正常的四次挥手流程。否则抛弃缓冲区中的所有数据并发送RST分节,close返回
       [非阻塞套接字]
       当启动了l_onoff,无论l_linger设置了多少秒,都会直接抛弃发送缓冲区中的数据,并向对端发送RST分节,close返回EWOULDBLOCK的err
 
@@ -93,13 +93,14 @@ socket_opts options[] = {
       //todo 写程序验证
       //阻塞套接字
         客户端:
-            --> write 90000字节 --> 直接close
-            --> 设置SO_LINGER -> 1,0 --> write 90000字节 --> close
-            --> 设置SO_LINGER -> 1,5 --> write 90000字节 --> close
+            --> write 90000字节 --> 直接close --> 服务端收到90000字节的数据和fin包
+            --> 设置SO_LINGER -> 1,0 --> write 90000字节 --> close --> 服务端收到90000字节的数据和rst包
+            --> 设置SO_LINGER -> 1,5 --> write 90000字节 --> close --> 服务端收到90000字节的数据和fin包
         服务端:
             accpet -> sleep(30) --> 打印读取到的数据的字节数
       //非阻塞套接字
         客户端:
+            --> 设置SO_LINGER -> 1,0 --> write 90000字节 --> close
             --> 设置SO_LINGER -> 1,5 --> write 90000字节 --> close
         服务端:
             accpet -> sleep(30) --> 打印读取到的数据的字节数
