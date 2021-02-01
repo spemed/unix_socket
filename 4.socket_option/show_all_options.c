@@ -40,7 +40,14 @@ static char *sock_str_linger(val* val,int len) {
 }
 
 static char *sock_str_timeval(val* val,int len) {
-    return "123";
+    if (len != sizeof(struct timeval )) {
+        snprintf(strres, sizeof(strres), "size (%d) not sizeof(struct timeval)", len);
+    } else {
+        //tv_sec秒
+        //tv_usec微秒
+        snprintf(strres, sizeof(strres),"value={tv_sec=%ld,tv_usec=%d}",val->timeval_val.tv_sec,val->timeval_val.tv_usec);
+    }
+    return strres;
 }
 
 socket_opts options[] = {
@@ -135,6 +142,16 @@ socket_opts options[] = {
         //todo 如果发送缓冲区中的数据大于低水位标记,select/poll都会返回可写事件
     {"SO_SNDLOWAT",SOL_SOCKET,SO_SNDLOWAT,sock_str_int},
 #endif
+#ifdef SO_SNDTIMEO
+    //发送超时时间
+    //todo 不懂该选项选项
+    {"SO_SNDTIMEO",SOL_SOCKET,SO_SNDTIMEO,sock_str_timeval},
+#endif
+#ifdef SO_RCVTIMEO
+    //接受超时时间
+    //todo 不懂该选项
+    {"SO_RCVTIMEO",SOL_SOCKET,SO_RCVTIMEO,sock_str_timeval},
+#endif
 #ifdef SO_REUSEADDR
     //socket level是否允许地址复用,flag类型
     {"SO_REUSEADDR",SOL_SOCKET,SO_REUSEADDR,sock_str_flag},
@@ -154,6 +171,22 @@ socket_opts options[] = {
 #ifdef SO_USELOOPBACK
     //socket level路由套接字取得所发送数据的副本,flag类型
     {"SO_USELOOPBACK",SOL_SOCKET,SO_USELOOPBACK,sock_str_flag},
+#endif
+#ifdef IP_TOS
+    //服务类型和优先权,value类型,为int
+    {"IP_TOS",IPPROTO_IP,IP_TOS,sock_str_int},
+#endif
+#ifdef IP_TTL
+    //ip报文的存活时间[最大跳数],value类型,为int
+    {"IP_TTL",IPPROTO_IP,IP_TTL,sock_str_int},
+#endif
+#ifdef TCP_MAXSEG
+    //tcp最大分节的大小,关系到流量控制策略,value类型,为int
+    {"TCP_MAXSEG",IPPROTO_TCP,TCP_MAXSEG,sock_str_int},
+#endif
+#ifdef TCP_NODELAY
+    //是否禁止negle算法,关系到流量控制策略,flag类型
+    {"TCP_NODELAY",IPPROTO_TCP,TCP_NODELAY,sock_str_flag},
 #endif
     {NULL,0,0,NULL}
 };

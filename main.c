@@ -2,10 +2,11 @@
 #include "0.hello_socket/server.h"
 #include "3.multiple_io/poll/poll_cli.h"
 #include "4.socket_option/so_linger.h"
+#include "4.socket_option/show_all_options.h"
 
 
 int main() {
-    client_handle(10000);
+    print_socket_options();
     return 0;
 }
 
