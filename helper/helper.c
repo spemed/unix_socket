@@ -179,14 +179,16 @@ sigfunc *signal_setter(int signo,sigfunc* func) {
     sigemptyset(&(act.sa_mask)); //把sa_mask设置为空集,意味在信号函数处理的过程中,不阻塞额外的信号
     act.sa_flags = 0; //初始化标识位
     //如果当前信号为时钟信号[时钟中断,可以实现定时器]
-    //跨平台兼容
     if (signo == SIGALRM) {
 #ifdef SA_INTERRUPT
+        //跨平台兼容,可能对于sunos 4.x系统接受到信号的默认行为都会重启系统调用
         act.sa_flags |= SA_INTERRUPT; //sunos 4.x
 #endif
     } else {
 #ifdef SA_RESTART
-        //意味当信号回调执行完会恢复被打断的慢系统调用
+        //接受到信号时,会重启被打断的慢系统调用
+        //具体表现就是,信号的回调函数只有当慢系统调用退出[目标事件发生],信号回调才会执行[进程接受到多个同类型信号只会保存最近收到的一个信号]且执行一次
+        //但是不同的posix os对于可重启的系统调用也有自己的定义。比如Berkeley的实现从不自动重启select,有些实现从不重启accept和recvfrom等
         act.sa_flags |= SA_RESTART; //srv4 4.4BSD
 #endif
     }
