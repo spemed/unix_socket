@@ -176,9 +176,12 @@ int Server(unsigned int port) {
 sigfunc *signal_setter(int signo,sigfunc* func) {
     struct sigaction act,oact;
     act.sa_handler = func; //接受到信号时需要执行的回调
-    sigemptyset(&(act.sa_mask)); //把sa_mask设置为空集,意味在信号函数处理的过程中,不阻塞额外的信号
+    //todo 此处的阻塞递交,是指 1.进程在执行信号回调的过程中,内核阻止了把信号递交给进程的行为 还是 2.进程在执行回调的过程中,接受到被阻塞的信号也暂时不执行其回调[这个需要在多线程环境下才能观察出来]
+    sigemptyset(&(act.sa_mask)); //把sa_mask设置为空集,意味在信号函数处理的过程中,不阻塞额外的信号[除了本信号]。
     act.sa_flags = 0; //初始化标识位
     //如果当前信号为时钟信号[时钟中断,可以实现定时器]
+    //对于SIGALRM信号选择不让其重启慢系统调用,这是因为应用层可能需要该信号实现一些超时机制
+    //避免进程无限期阻塞于慢系统调用中
     if (signo == SIGALRM) {
 #ifdef SA_INTERRUPT
         //跨平台兼容,可能对于sunos 4.x系统接受到信号的默认行为都会重启系统调用

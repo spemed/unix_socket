@@ -33,4 +33,4 @@ add_executable(
         4.socket_option/show_all_options.c
         4.socket_option/show_all_options.h
         4.socket_option/so_linger.c
-        4.socket_option/so_linger.h)
+        4.socket_option/so_linger.h 6.signal_test/singel_thread.c 6.signal_test/singel_thread.h 6.signal_test/multiple_thread.c 6.signal_test/multiple_thread.h)
